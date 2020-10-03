@@ -1,0 +1,18 @@
+
+---
+- hosts: all
+  become_user: root
+  tasks:
+  - name: change hostname
+    hostname:
+      name: "sunrise"
+  - name: install packages
+    apt:
+      pkg: '{{ item }}'
+      state: installed
+      update cache: true
+    with items:
+      - vim
+      - htop
+      - rsync
+    tags: pkgs

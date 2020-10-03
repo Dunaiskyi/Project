@@ -1,0 +1,21 @@
+$TTL 1h
+
+@ IN SOA ns1 root (
+2020030701	; Serial
+30m 		; Refresh
+15m		; Retry
+2w 		; Expire
+20m		; Negative Cache TTL
+)
+
+@ IN NS ns1
+@ IN NS ns2
+ns1 IN A 45.137.155.129
+ns2 IN A 45.137.155.129
+@ IN A 45.137.155.129
+* IN A 45.137.155.129
+@ IN CAA 0 issue "letsencrypt.org"
+@ IN CAA 0 issuewild "letsencrypt.org"
+_acme-challenge.gargantua.tech. IN TXT 2iEbKynRnVRGbaFPd8PCCryk0cu3yoXVwgpKmTtrXNQ
+_acme-challenge.gargantua.tech. IN TXT 6ePtwQzUn-He6clCCuMzI6CEPyRhPV6yF3uTk5-vZuQ
+

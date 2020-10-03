@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  debian:
+    build: ./debian/
+    image: debian_i:release
+
+  nginx:
+    build: ./nginx/
+    image: nginx_i:release
+    container_name: nginx_c
+    ports:
+      - 80:80/tcp
+      - 443:443/tcp
+    volumes:
+      - /home/user/project_sunrise/root/etc/nginx/:/etc/nginx/
+      - /home/user/project_sunrise/root/var/www/:/var/www/
+    networks:
+      - connect
+    depends_on:
+      - debian
+
+  bind:
+    build: ./bind/
+    image: bind9_i:release
+    container_name: bind9_c
+    ports:
+      - 53:53/udp
+      - 53:53/tcp
+    volumes:
+      - /home/user/project_sunrise/root/etc/bind/:/etc/bind/
+      - /home/user/project_sunrise/root/var/cache/bind/:/var/cache/bind/
+    depends_on:
+      - debian
+
+  psycho_tests_bot:
+    build: ./telegram/psycho_tests_bot/
+    image: psycho_tests_bot_i:release
+    container_name: psycho_tests_bot_c
+    ports:
+      - 8080:8080
+    volumes:
+      - /home/user/project_sunrise/root/etc/psycho_tests_bot:/etc/psycho_tests_bot
+    depends_on:
+      - debian
+
+networks:
+  connect:
+    driver: bridge
