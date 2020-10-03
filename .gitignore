@@ -3,3 +3,4 @@
 ./backup/root/etc/bind/bind.keys
 ./backup/root/etc/bind/rndc.key
 ./backup/root/etc/bind/rndc.key.old
+./backup/ansible/host
